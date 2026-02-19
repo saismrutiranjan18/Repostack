@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../authContext";
 
-import { Button, Text } from "@primer/react";  // ✅ FIXED IMPORTS
+import { PageHeader } from "@primer/react/drafts";
+import { Box, Button } from "@primer/react";
 import "./auth.css";
 
 import logo from "../../assets/github-mark-white.svg";
@@ -22,9 +23,9 @@ const Signup = () => {
     try {
       setLoading(true);
       const res = await axios.post("http://localhost:3002/signup", {
-        email,
-        password,
-        username,
+        email: email,
+        password: password,
+        username: username,
       });
 
       localStorage.setItem("token", res.data.token);
@@ -49,12 +50,13 @@ const Signup = () => {
 
       <div className="login-box-wrapper">
         <div className="login-heading">
-          {/* Replaced Box + Heading */}
-          <div style={{ padding: "8px" }}>
-            <Text as="h2" sx={{ fontSize: 3, fontWeight: "bold" }}>
-              Sign Up
-            </Text>
-          </div>
+          <Box sx={{ padding: 1 }}>
+            <PageHeader>
+              <PageHeader.TitleArea variant="large">
+                <PageHeader.Title>Sign Up</PageHeader.Title>
+              </PageHeader.TitleArea>
+            </PageHeader>
+          </Box>
         </div>
 
         <div className="login-box">
@@ -84,7 +86,7 @@ const Signup = () => {
             />
           </div>
 
-          <div>
+          <div className="div">
             <label className="label">Password</label>
             <input
               autoComplete="off"
